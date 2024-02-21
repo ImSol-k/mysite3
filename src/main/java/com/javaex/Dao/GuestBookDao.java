@@ -60,7 +60,7 @@ public class GuestBookDao {
 			pstmt.setString(2, vo.getPw());
 			pstmt.setString(3, vo.getContent());
 			
-			GuestBookVo guestVo = new GuestBookVo(vo.getPw(), vo.getName(), vo.getContent());
+			GuestBookVo guestVo = new GuestBookVo(vo.getName(), vo.getPw(), vo.getContent());
 			guestList.add(guestVo);
 			
 			pstmt.executeUpdate();
@@ -96,7 +96,7 @@ public class GuestBookDao {
 		
 		try {
 			String query = "";
-			query += " select book_id, id, content, date from guestbook ";
+			query += " select book_id, name, pw, content, date from guestbook ";
 			
 			pstmt = conn.prepareStatement(query);
 
@@ -104,11 +104,12 @@ public class GuestBookDao {
 			
 			while(rs.next()) {
 				int bookId = rs.getInt("book_id");
-				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String pw = rs.getString("pw");
 				String content = rs.getString("content");
 				String date = rs.getString("date");
 				
-				GuestBookVo guestVo = new GuestBookVo(bookId, id, content, date);
+				GuestBookVo guestVo = new GuestBookVo(bookId, name, pw, content, date);
 				guestList.add(guestVo);
 				
 			}

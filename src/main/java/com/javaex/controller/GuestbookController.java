@@ -56,7 +56,7 @@ public class GuestbookController extends HttpServlet {
 
 			System.out.println(pass);
 
-			GuestBookVo guestVo = new GuestBookVo(pass);
+			GuestBookVo guestVo = new GuestBookVo();
 			GuestBookDao guestDao = new GuestBookDao();
 			guestDao.userInsert(guestVo);
 			response.sendRedirect("/mysite3/guestbook?action=adForm");
