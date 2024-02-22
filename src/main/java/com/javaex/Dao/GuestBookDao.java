@@ -72,16 +72,17 @@ public class GuestBookDao {
 		close();
 	}//userInsert()
 	
-	public void userDelete(GuestBookVo vo) {
+	public void userDelete(String pw, int no) {
 		getConnection();
 		try {
 			String query = "";
-			query += " delete from guestbook where id = (select id from users where pass = ?) ";
-			
+			query += " delete from guestbook where pw = ? and book_id = ? ";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, vo.getPw());
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, no);
 			
-			pstmt.executeUpdate();
+			int count = pstmt.executeUpdate();
+			System.out.println(count+"건 성공");
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -90,7 +91,7 @@ public class GuestBookDao {
 		close();
 	}//userInsert()
 	
-	public void guestSelect() {
+	public List<GuestBookVo> guestSelect() {
 		getConnection();
 		List<GuestBookVo> guestList = new ArrayList<GuestBookVo>();
 		
@@ -123,6 +124,7 @@ public class GuestBookDao {
 		} 
 		
 		close();
+		return guestList;
 	}
 	
 }

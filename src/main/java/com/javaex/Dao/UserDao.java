@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 import com.javaex.vo.UserVo;
 
 public class UserDao {
@@ -66,18 +68,29 @@ public class UserDao {
 		close();
 	}//userInsert()
 	
-	public void userLogin(UserVo vo) {
+	public UserVo userLogin(UserVo vo) {
+		
+		getConnection();
+		UserVo authUser = null;
 		try {
 			
 			String query = "";
-			query += " select id, pass from userss ";
+			query += " select no, name from users ";
 			query += " where id = ? and pass = ? ";
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPw());
 			
-			pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int no = rs.getInt("no");
+				String name  = rs.getString("name");
+				authUser = new UserVo();
+				authUser.setNo(no);
+				authUser.setName(name);
+			}
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -85,7 +98,35 @@ public class UserDao {
 		
 		close();
 		
+		return authUser;
+		
 		
 	}//userLogin
+	
+	public UserVo userUpdate(int no, UserVo vo) {
+		getConnection();
+		try {
+			String query = "";
+			query += " update users  ";
+			query += " set pass = ?, name = ?, gender = ? ";
+			query += " where no = ? ";
+			
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vo.getPw());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setInt(4, no);
+			
+			System.out.println(vo);
+			pstmt.executeUpdate();
+						
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} 
+		
+		close();
+		return vo;
+	}//userUpdate()
 
 }
