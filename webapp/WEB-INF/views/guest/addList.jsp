@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.javaex.vo.GuestBookVo"%>
 
@@ -10,10 +11,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="/mysite3/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="/mysite3/assets/css/guestbook.css" rel="stylesheet"
-	type="text/css">
+<link href="/mysite3/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite3/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -78,8 +77,7 @@
 
 					</form>
 					
-					<% for(int i = 0; i < guestList.size(); i++) { %>
-					
+					<c:forEach items="${requestScope.guestList }" var="guestList">
 					<table class="guestRead">
 						<colgroup>
 							<col style="width: 10%;">
@@ -89,17 +87,19 @@
 						</colgroup>
 
 						<tr>
-							<td><%= guestList.get(i).getNo() %></td>
-							<td><%= guestList.get(i).getName() %></td>
-							<td><%= guestList.get(i).getDate() %></td>
-							<td><a href="/mysite3/guestbook?action=deleteForm&no=<%=guestList.get(i).getNo()%>">[삭제]</a></td>
+							<td>${guestList.no }</td>
+							<td>${guestList.name }</td>
+							<td>${guestList.date }</td>
+							<td><a href="/mysite3/guestbook?action=deleteForm&no=${guestList.no }">[삭제]</a></td>
 						</tr>
 
 						<tr>
-							<td colspan=4 class="text-left"><%= guestList.get(i).getContent() %></td>
+							<td colspan=4 class="text-left">${guestList.content }</td>
 						</tr>
 					</table>
-					<% } %>
+					</c:forEach>
+					
+					
 					<!-- //guestRead -->
 
 				</div>

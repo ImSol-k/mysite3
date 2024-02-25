@@ -62,8 +62,7 @@
 									<input type='hidden' name="action" value="delete">
 									<input type='hidden' name="no" value="${no}">
 									<td><a
-										href="http://localhost:8080/mysite3/user?action=loginForm">[메인으로
-											돌아가기]</a></td>
+										href="http://localhost:8080/mysite3/user?action=loginForm">[메인으로 돌아가기]</a></td>
 								</tr>
 							</table>
 							<input type='hidden' name="action" value="main">

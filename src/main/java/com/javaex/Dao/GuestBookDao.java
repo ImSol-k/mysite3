@@ -75,6 +75,7 @@ public class GuestBookDao {
 	public void userDelete(String pw, int no) {
 		getConnection();
 		try {
+			System.out.println("삭제삭제");
 			String query = "";
 			query += " delete from guestbook where pw = ? and book_id = ? ";
 			pstmt = conn.prepareStatement(query);
@@ -126,5 +127,6 @@ public class GuestBookDao {
 		close();
 		return guestList;
 	}
+	
 	
 }

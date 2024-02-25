@@ -28,7 +28,7 @@ public class GuestbookController extends HttpServlet {
 			
 			GuestBookDao guestDao = new GuestBookDao();
 
-			List<GuestBookVo> guestList = guestDao.guestSelect();;
+			List<GuestBookVo> guestList = guestDao.guestSelect();
 
 			request.setAttribute("guestList", guestList);
 

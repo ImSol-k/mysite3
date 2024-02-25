@@ -65,6 +65,9 @@ public class UserController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("authUser", authUser);
 				session.setAttribute("userVo", userVo);
+				
+				System.out.println("vo = " + userVo);
+				System.out.println("authUser = " + authUser);
 
 				WebUtil.redirect(request, response, "/mysite3/main");
 

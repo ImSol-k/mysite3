@@ -19,7 +19,6 @@
 <body>
 	<div id="wrap">
 
-		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
 
 			<!-- //nav -->
@@ -65,7 +64,6 @@
 			<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
 		</div>
 		<!-- //wrap -->
-	</div>
 </body>
 
 </html>
